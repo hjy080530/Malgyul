@@ -22,104 +22,41 @@ const ResultPage = () => {
       <ResultTextSort>
         <TextSort>
           <TitleSort>
-            <h1
-              css={[
-                fonts.H1,
-                css`
-                  color: ${color.malgyulWhite};
-                `,
-              ]}
-            >
+            <h1 css={[fonts.H1, css`color: ${color.malgyulWhite};`,]}>
               정진의 속도
             </h1>
-            <h3
-              css={[
-                fonts.H3,
-                css`
-                  color: ${color.malgyulGray};
-                `,
-              ]}
-            >
+            <h3 css={[fonts.H3, css`color: ${color.malgyulGray};`,]}>
               WPM
             </h3>
           </TitleSort>
-          <p
-            css={[
-              fonts.D1,
-              css`
-                color: ${color.malgyulGreen};
-              `,
-            ]}
-          >
+          <p css={[fonts.D1, css`color: ${color.malgyulGreen};`,]}>
             {wpm} 단어
           </p>
         </TextSort>
         <SmallTextSort>
           <TextSort>
             <TitleSort>
-              <h1
-                css={[
-                  fonts.H1,
-                  css`
-                    color: ${color.malgyulWhite};
-                  `,
-                ]}
-              >
+              <h1 css={[fonts.H1, css`color: ${color.malgyulWhite};`,]}>
                 정견의 정도
               </h1>
-              <h3
-                css={[
-                  fonts.H3,
-                  css`
-                    color: ${color.malgyulGray};
-                  `,
-                ]}
-              >
+              <h3 css={[fonts.H3, css`color: ${color.malgyulGray};`,]}>
                 정확도
               </h3>
             </TitleSort>
-            <p
-              css={[
-                fonts.D2,
-                css`
-                  color: ${color.malgyulGreen};
-                `,
-              ]}
-            >
+            <p css={[fonts.D2, css`color: ${color.malgyulGreen};`,]}>
               {accuracy}%
             </p>
           </TextSort>
           <TextSort>
             <TitleSort>
-              <h1
-                css={[
-                  fonts.H1,
-                  css`
-                    color: ${color.malgyulWhite};
-                  `,
-                ]}
-              >
+              <h1 css={[fonts.H1, css`color: ${color.malgyulWhite};`,]}>
                 번뇌의 흔적
               </h1>
-              <h3
-                css={[
-                  fonts.H3,
-                  css`
-                    color: ${color.malgyulGray};
-                  `,
-                ]}
-              >
+              <h3 css={[fonts.H3, css`color: ${color.malgyulGray};`,]}>
                 오타율
               </h3>
             </TitleSort>
-            <p
-              css={[
-                fonts.D2,
-                css`
-                  color: ${color.malgyulGreen};
-                `,
-              ]}
-            >
+            <p css={[fonts.D2, css`color: ${color.malgyulGreen};`,]}>
               {errorRate} %
             </p>
           </TextSort>
