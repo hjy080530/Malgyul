@@ -1,12 +1,14 @@
 /** @jsxImportSource @emotion/react */
-import styled from "@emotion/styled";
-
-const Title = styled.h1`
-  color: hotpink;
-`;
-
-function App() {
-    return <Title>말결 React 시작! 🌸</Title>;
-}
+//import styled from "@emotion/styled";
+import LandingPage from "./pages/Landing.tsx";
+import GlobalStyles from "./types/Global.tsx";
+const App = () => {
+    return (
+        <>
+            <GlobalStyles />
+            <LandingPage/>
+        </>
+    )
+};
 
 export default App;
