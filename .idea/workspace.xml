@@ -5,35 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f51a0b4-8efb-4af8-bf99-d95f3d5cf39f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.prettierrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/client/src/components/ChooseButton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/client/src/components/Header.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/client/src/components/SelectProperty.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/client/src/components/TypingChecker.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/LandingPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/MainPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/client/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/apps/client/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/client/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/apps/client/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/client/eslint.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/client/eslint.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/client/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/client/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/client/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/client/src/assets/images/malgyul_logo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/client/src/assets/images/malgyul_logo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/client/src/components/button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/client/src/components/Button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/client/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/client/src/main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/client/src/pages/Landing.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/client/src/types/Global.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/client/src/types/Global.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/client/src/types/color.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/client/src/types/color.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/client/src/types/fonts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/client/src/types/fonts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/client/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/client/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/client/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/client/vite.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.modules.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.modules.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.pnpm-workspace-state.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.pnpm-workspace-state.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.pnpm/lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.pnpm/lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-workspace.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-workspace.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,6 +124,7 @@
       <workItem from="1744793257790" duration="1489000" />
       <workItem from="1744816624835" duration="3872000" />
       <workItem from="1744859360025" duration="3156000" />
+      <workItem from="1744902299925" duration="2608000" />
     </task>
     <servers />
   </component>
