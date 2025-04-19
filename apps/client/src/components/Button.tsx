@@ -34,5 +34,5 @@ const StyledButton = styled.button`
   border: none;
   border-radius: 10px;
 `;
-vxcz
+#아니 직므 장나냏
 export default Button;
