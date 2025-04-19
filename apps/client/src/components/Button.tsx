@@ -34,5 +34,5 @@ const StyledButton = styled.button`
   border: none;
   border-radius: 10px;
 `;
-
+vxcz
 export default Button;
