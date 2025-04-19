@@ -7,7 +7,8 @@ import color from '../types/color.ts';
 type ButtonProps = {
   children: React.ReactNode;
 };
-dvsm;svm;s
+
+dvsnl
 
 const Button = ({ children }: ButtonProps) => {
   return (
