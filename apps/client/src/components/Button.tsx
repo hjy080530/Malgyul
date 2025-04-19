@@ -7,6 +7,7 @@ import color from '../types/color.ts';
 type ButtonProps = {
   children: React.ReactNode;
 };
+dvsm;svm;s
 
 const Button = ({ children }: ButtonProps) => {
   return (
@@ -34,5 +35,5 @@ const StyledButton = styled.button`
   border: none;
   border-radius: 10px;
 `;
-#아니 직므 장나냏
+
 export default Button;
