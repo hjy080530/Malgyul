@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import fonts from "../types/fonts.ts";
 import color from "../types/color.ts";
 const TypingChecker = () => {
-  const targetText = "예시  문장입니다";
+  const targetText = "예시 문장입니다";
   const [input, setInput] = useState("");
   const [isComposing, setIsComposing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
