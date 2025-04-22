@@ -5,7 +5,7 @@ import fonts from "../types/fonts.ts";
 import color from "../types/color.ts";
 
 const TypingChecker = () => {
-  const targetText = "예시 문장입니다";
+  const targetText = "예시  문장입니다";
 
   const [input, setInput] = useState("");
   const [isComposing, setIsComposing] = useState(false);
@@ -16,10 +16,9 @@ const TypingChecker = () => {
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const nextValue = e.target.value;
-    if (!isComposing && nextValue.length <= targetText.length) {
-      setInput(nextValue);
-    }
+    setInput(e.target.value); // 무조건 업데이트!
+    console.log(e.target.value);
+
   };
 
   const handleCompositionStart = () => {
@@ -29,10 +28,14 @@ const TypingChecker = () => {
   const handleCompositionEnd = (e: React.CompositionEvent<HTMLInputElement>) => {
     setIsComposing(false);
     const nextValue = e.currentTarget.value;
+
     if (nextValue.length <= targetText.length) {
       setInput(nextValue);
+    } else {
+      setInput(nextValue.slice(0, targetText.length)); // 길이 초과 방지
     }
   };
+
   return (
     <StyledTypingChecker onClick={() => inputRef.current?.focus()}>
       <TextDisplay>
@@ -50,9 +53,7 @@ const TypingChecker = () => {
             </Char>
           );
         })}
-        {input.length < targetText.length && (
-          <Caret>{input}</Caret>
-        )}
+        {input.length < targetText.length && <Caret />}
       </TextDisplay>
 
       <HiddenInput
@@ -68,45 +69,44 @@ const TypingChecker = () => {
 
 const StyledTypingChecker = styled.div`
   background-color: ${color.malgyulBlack};
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   border-radius: 12px;
   font-family: ${fonts.P1};
   cursor: text;
   position: relative;
-    width: 60%;
+  width: 60%;
+  padding: 1rem;
 `;
 
 const TextDisplay = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.1rem;
-    
 `;
 
 const Char = styled.span<{ status: "correct" | "wrong" | "pending" }>`
   color: ${({ status }) =>
-          status === "correct"
-                  ? color.malgyulWhite
-                  : status === "wrong"
-                          ? color.malgyulRed
-                          : "#666666"
-  };
+  status === "correct"
+    ? color.malgyulWhite
+    : status === "wrong"
+      ? color.malgyulRed
+      : "#666666"};
 `;
 
 const HiddenInput = styled.input`
   position: absolute;
-  opacity: 0;
-  pointer-events: none;
+  left: -9999px;
+  top: 0;
+  // opacity나 pointer-events 쓰지 마셈
 `;
 
 const Caret = styled.span`
   width: 1px;
   background-color: ${color.malgyulWhite};
-  margin-left: 1px;
   animation: blink 1s step-start infinite;
-  color: ${color.malgyulWhite};
+  margin-left: 1px;
 
   @keyframes blink {
     50% {
@@ -114,4 +114,5 @@ const Caret = styled.span`
     }
   }
 `;
+
 export default TypingChecker;

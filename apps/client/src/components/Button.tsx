@@ -8,8 +8,6 @@ type ButtonProps = {
   children: React.ReactNode;
 };
 
-dvsnl
-
 const Button = ({ children }: ButtonProps) => {
   return (
     <StyledButton>
