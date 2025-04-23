@@ -87,7 +87,6 @@ const HiddenInput = styled.input`
   position: absolute;
   left: -9999px;
   top: 0;
-  // opacity나 pointer-events 쓰지 마셈
 `;
 
 const Caret = styled.span`
