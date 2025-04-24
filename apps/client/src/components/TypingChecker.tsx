@@ -38,7 +38,7 @@ const TypingChecker = () => {
           }
           return (
             <Char key={idx} status={status}>
-              {char}
+              {typedChar != null ? typedChar : char}
             </Char>
           );
         })}
