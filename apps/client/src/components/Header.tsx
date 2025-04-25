@@ -7,10 +7,13 @@ const Header = () => {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate('/');
-  }
+  };
   return (
     <StyledHeader>
-      <Logo css={{ width: '180px', height: 'fit-content', marginTop: '1.5rem' }} onClick={handleClick} />
+      <Logo
+        css={{ width: '180px', height: 'fit-content', marginTop: '1.5rem' }}
+        onClick={handleClick}
+      />
     </StyledHeader>
   );
 };

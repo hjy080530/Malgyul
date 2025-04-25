@@ -23,7 +23,7 @@ const fonts = {
   H6: fontGenerator(500, 1.125, 140, 0.15),
 
   P1: fontGenerator(400, 3.25, 52.1, 0),
-  P2: fontGenerator(600, 3.25, 52.1,-0.15),
+  P2: fontGenerator(600, 3.25, 52.1, -0.15),
 
   btn1: fontGenerator(500, 2, 2.2, 0),
   btn2: fontGenerator(500, 2, 0.1, 0),

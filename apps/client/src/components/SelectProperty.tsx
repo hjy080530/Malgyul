@@ -62,7 +62,7 @@ const StyledChooseSort = styled.div`
   display: flex;
   justify-content: space-between;
   width: 60%;
-    margin-top: 95px;
+  margin-top: 95px;
   align-items: flex-start;
 `;
 

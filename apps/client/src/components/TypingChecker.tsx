@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import { useState, useRef, useEffect } from "react";
-import styled from "@emotion/styled";
-import fonts from "../types/fonts.ts";
-import color from "../types/color.ts";
+import { useState, useRef, useEffect } from 'react';
+import styled from '@emotion/styled';
+import fonts from '../types/fonts.ts';
+import color from '../types/color.ts';
 const TypingChecker = () => {
-  const targetText = "예시 문장입니다";
-  const [input, setInput] = useState("");
+  const targetText = '예시 문장입니다';
+  const [input, setInput] = useState('');
   const [isComposing, setIsComposing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -13,7 +13,7 @@ const TypingChecker = () => {
   }, []);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
-    console.log(e.target.value)
+    console.log(e.target.value);
   };
   const handleCompositionStart = () => {
     setIsComposing(true);
@@ -30,11 +30,11 @@ const TypingChecker = () => {
   return (
     <StyledTypingChecker onClick={() => inputRef.current?.focus()}>
       <TextDisplay>
-        {targetText.split("").map((char, idx) => {
+        {targetText.split('').map((char, idx) => {
           const typedChar = input[idx];
-          let status: "correct" | "wrong" | "pending" = "pending";
+          let status: 'correct' | 'wrong' | 'pending' = 'pending';
           if (typedChar != null) {
-            status = typedChar === char ? "correct" : "wrong";
+            status = typedChar === char ? 'correct' : 'wrong';
           }
           return (
             <Char key={idx} status={status}>
@@ -73,13 +73,9 @@ const TextDisplay = styled.div`
   gap: 0.1rem;
 `;
 
-const Char = styled.span<{ status: "correct" | "wrong" | "pending" }>`
+const Char = styled.span<{ status: 'correct' | 'wrong' | 'pending' }>`
   color: ${({ status }) =>
-  status === "correct"
-    ? color.malgyulWhite
-    : status === "wrong"
-      ? color.malgyulRed
-      : "#666666"};
+    status === 'correct' ? color.malgyulWhite : status === 'wrong' ? color.malgyulRed : '#666666'};
 `;
 
 const HiddenInput = styled.input`
