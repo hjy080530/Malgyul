@@ -6,11 +6,11 @@ import color from '../types/color.ts';
 
 type ButtonProps = {
   children: React.ReactNode;
-};
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({ children }: ButtonProps) => {
+const Button = ({ children, ...props }: ButtonProps) => {
   return (
-    <StyledButton>
+    <StyledButton {...props}>
       <p
         css={[
           font.btn1,
@@ -33,6 +33,7 @@ const StyledButton = styled.button`
   background-color: ${color.malgyulGreen};
   border: none;
   border-radius: 10px;
+  cursor: pointer;
 `;
 
 export default Button;

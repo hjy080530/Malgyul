@@ -1,11 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 import Logo from '../assets/images/malgyul_logo.tsx';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/');
+  }
   return (
     <StyledHeader>
-      <Logo css={{ width: '180px', height: 'fit-content', marginTop: '1.5rem' }} />
+      <Logo css={{ width: '180px', height: 'fit-content', marginTop: '1.5rem' }} onClick={handleClick} />
     </StyledHeader>
   );
 };

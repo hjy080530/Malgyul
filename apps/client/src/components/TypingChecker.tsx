@@ -56,7 +56,6 @@ const TypingChecker = () => {
 };
 
 const StyledTypingChecker = styled.div`
-  background-color: ${color.malgyulBlack};
   display: flex;
   justify-content: flex-start;
   align-items: center;

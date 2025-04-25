@@ -6,8 +6,14 @@ import color from '../types/color.ts';
 import { css } from '@emotion/react';
 import Logo from '../assets/images/malgyul_logo.tsx';
 import Button from '../components/Button.tsx';
+import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/typing');
+  };
   return (
     <StyledBackground>
       <Logo css={{ width: '350px', height: 'fit-content', marginTop: '2rem' }} />
@@ -22,7 +28,7 @@ const LandingPage = () => {
         >
           마음이 머무는 그곳에 글이 머뭅니다.
         </h1>
-        <Button>들어가기</Button>
+        <Button onClick={handleClick}>들어가기</Button>
       </SortElements>
     </StyledBackground>
   );

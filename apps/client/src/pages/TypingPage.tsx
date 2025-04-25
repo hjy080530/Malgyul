@@ -19,8 +19,10 @@ const StyledMainPage = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    min-height: 100vh; /* 화면 높이 기준 최소 높이 보장 */
-    background-color: ${color.malgyulBlack};
+    min-height: 100vh;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%),
+    ${color.malgyulBlack};
 `;
 
 export default MainPage;
