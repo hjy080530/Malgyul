@@ -1,32 +1,45 @@
 /** @jsxImportSource @emotion/react */
 import { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
-import fonts from '../types/fonts.ts';
-import color from '../types/color.ts';
-const TypingChecker = () => {
+import fonts from '../types/fonts';
+import color from '../types/color';
+
+interface TypingCheckerProps {
+  selectedSeconds: number;
+  isStarted: boolean;
+  onTimeEnd: () => void;
+}
+
+
+const TypingChecker = ({ isStarted, onTimeEnd }: TypingCheckerProps) => {
   const targetText = '예시 문장입니다';
   const [input, setInput] = useState('');
-  const [isComposing, setIsComposing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
+
+  useEffect(() => {
+    if (isStarted) {
+      setInput('');
+      inputRef.current?.focus();
+    }
+  }, [isStarted]);
+
+  useEffect(() => {
+    if (isStarted && input.length === targetText.length) {
+      onTimeEnd();
+    }
+  }, [input, isStarted, onTimeEnd]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-    console.log(e.target.value);
-  };
-  const handleCompositionStart = () => {
-    setIsComposing(true);
-  };
-  const handleCompositionEnd = (e: React.CompositionEvent<HTMLInputElement>) => {
-    setIsComposing(false);
-    const nextValue = e.currentTarget.value;
+    const nextValue = e.target.value;
     if (nextValue.length <= targetText.length) {
       setInput(nextValue);
-    } else {
-      setInput(nextValue.slice(0, targetText.length)); // 길이 초과 방지
     }
   };
+
   return (
     <StyledTypingChecker onClick={() => inputRef.current?.focus()}>
       <TextDisplay>
@@ -48,12 +61,12 @@ const TypingChecker = () => {
         ref={inputRef}
         value={input}
         onChange={handleChange}
-        onCompositionStart={handleCompositionStart}
-        onCompositionEnd={handleCompositionEnd}
       />
     </StyledTypingChecker>
   );
 };
+
+export default TypingChecker;
 
 const StyledTypingChecker = styled.div`
   display: flex;
@@ -75,7 +88,7 @@ const TextDisplay = styled.div`
 
 const Char = styled.span<{ status: 'correct' | 'wrong' | 'pending' }>`
   color: ${({ status }) =>
-    status === 'correct' ? color.malgyulWhite : status === 'wrong' ? color.malgyulRed : '#666666'};
+  status === 'correct' ? color.malgyulWhite : status === 'wrong' ? color.malgyulRed : '#666666'};
 `;
 
 const HiddenInput = styled.input`
@@ -96,5 +109,3 @@ const Caret = styled.span`
     }
   }
 `;
-
-export default TypingChecker;

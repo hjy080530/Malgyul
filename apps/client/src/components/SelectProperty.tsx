@@ -1,19 +1,25 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import ChooseButton, { SelectButtonProps } from './ChooseButton';
+import ChooseButton from './ChooseButton';
 import { useState } from 'react';
-import fonts from '../types/fonts'; // Ensure fonts are being imported correctly
+import fonts from '../types/fonts';
 import color from '../types/color';
 import { css } from '@emotion/react';
 
-interface ChooseButtonStyledProps extends SelectButtonProps {
+interface SelectPropertyProps {
+  setSelectedSeconds: (seconds: number) => void;
+}
+
+// ✅ 여기 추가
+interface ChooseButtonStyledProps {
   isSelected: boolean;
 }
 
-const SelectProperty = () => {
-  const [selectedIndexSeconds, setSelectedIndexSeconds] = useState<number | null>(null);
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+const SelectProperty = ({ setSelectedSeconds }: SelectPropertyProps) => {
+  const [selectedIndexSeconds, setSelectedIndexSeconds] = useState<number>(0);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const optionsSeconds = ['십오 초', '삽십 초', '육십 초'];
+  const optionsSecondsValue = [15, 30, 60];
   const optionsString = ['명언', '긴 글'];
 
   return (
@@ -23,7 +29,10 @@ const SelectProperty = () => {
           <StyledChooseButton
             key={index}
             isSelected={selectedIndexSeconds === index}
-            onClick={() => setSelectedIndexSeconds(index)}
+            onClick={() => {
+              setSelectedIndexSeconds(index);
+              setSelectedSeconds(optionsSecondsValue[index]);
+            }}
           >
             <p
               css={css`
