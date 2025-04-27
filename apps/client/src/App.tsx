@@ -4,6 +4,7 @@ import GlobalStyles from './types/Global.tsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import TypingPage from './pages/TypingPage.tsx';
 import LandingPage from './pages/LandingPage.tsx';
+import ResultPage from './pages/ResultPage.tsx';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Routes>
           <Route path="/typing" element={<TypingPage />} />
           <Route path="/" element={<LandingPage />} />
+          <Route path="result" element={<ResultPage/>}/>
         </Routes>
       </BrowserRouter>
     </>
