@@ -6,14 +6,11 @@ import { useNavigate } from 'react-router-dom';
 const Header = () => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate('/');
+    navigate('/typing');
   };
   return (
     <StyledHeader>
-      <Logo
-        css={{ width: '180px', height: 'fit-content', marginTop: '1.5rem' }}
-        onClick={handleClick}
-      />
+      <Logo css={{ width: '180px', height: 'fit-content', marginTop: '1.5rem' }} onClick={handleClick} />
     </StyledHeader>
   );
 };

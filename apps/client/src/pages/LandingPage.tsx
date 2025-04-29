@@ -44,8 +44,7 @@ const StyledBackground = styled.div`
   justify-content: center;
   flex-direction: column;
   gap: 20px;
-  background-image:
-    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%), url(${BackgroundImg});
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%), url(${BackgroundImg});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

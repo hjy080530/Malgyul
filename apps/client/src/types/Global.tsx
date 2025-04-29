@@ -38,8 +38,7 @@ const GlobalStyle = () => (
 
       @font-face {
         font-family: 'Pretendard-Bold';
-        src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff')
-          format('woff');
+        src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
         font-weight: 600;
         font-style: normal;
       }

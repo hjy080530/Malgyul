@@ -46,11 +46,7 @@ const SelectProperty = ({ setSelectedSeconds }: SelectPropertyProps) => {
       </SecondsSort>
       <SecondsSort>
         {optionsString.map((label, index) => (
-          <StyledChooseButton
-            key={index}
-            isSelected={selectedIndex === index}
-            onClick={() => setSelectedIndex(index)}
-          >
+          <StyledChooseButton key={index} isSelected={selectedIndex === index} onClick={() => setSelectedIndex(index)}>
             <p
               css={css`
                 ${fonts.btn2}

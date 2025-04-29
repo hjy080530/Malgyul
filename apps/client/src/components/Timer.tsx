@@ -20,11 +20,7 @@ const Timer = ({ seconds }: TimerProps) => {
     return () => clearInterval(timerId);
   }, [timeLeft]);
 
-  return (
-    <div style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '20px' }}>
-      남은 시간: {timeLeft}초
-    </div>
-  );
+  return <div style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '20px' }}>남은 시간: {timeLeft}초</div>;
 };
 
 export default Timer;

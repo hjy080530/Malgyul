@@ -1,3 +1,5 @@
+import { supabase } from './supabase';
+
 async function getRandomQuote() {
   const { data, error } = await supabase
     .from('quotes')
