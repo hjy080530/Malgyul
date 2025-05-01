@@ -13,7 +13,8 @@ interface TypingCheckerProps {
 }
 
 const TypingChecker = ({ isStarted, onTimeEnd, setTypedText, setOriginalText }: TypingCheckerProps) => {
-  const targetText = '사랑은 살아있는 것만 같아요 뒤돌아보지 않는 생명 처럼 잠깨서 비라도 내리면 그리워 한 게 누구였던가 너무나 아쉬운 하루같아요 어린아이와의 약속처럼 이대로 떠나가 야만 하나요 다시는 안오잖아요 이런 내 맘속에서 사는 것같이 비가 오는 날에는 더 살아숨쉬네 사랑은 살아있는 것만 같아요 뒤돌아보지않는 생명처럼 잠깨서 비라도 내리면 그리워 한 게 누구였던가 112';
+  const targetText =
+    '사랑은 살아있는 것만 같아요 뒤돌아보지 않는 생명 처럼 잠깨서 비라도 내리면 그리워 한 게 누구였던가 너무나 아쉬운 하루같아요 어린아이와의 약속처럼 이대로 떠나가 야만 하나요 다시는 안오잖아요 이런 내 맘속에서 사는 것같이 비가 오는 날에는 더 살아숨쉬네 사랑은 살아있는 것만 같아요 뒤돌아보지않는 생명처럼 잠깨서 비라도 내리면 그리워 한 게 누구였던가 112';
   const [input, setInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const textDisplayRef = useRef<HTMLDivElement>(null);
@@ -120,13 +121,13 @@ const TextDisplay = styled.div`
 
 const Char = styled.span<{ status: 'correct' | 'wrong' | 'pending'; isSpace: boolean }>`
   color: ${({ status, isSpace }) =>
-  isSpace
-    ? '#ffffff55'
-    : status === 'correct'
-      ? color.malgyulWhite
-      : status === 'wrong'
-        ? color.malgyulRed
-        : '#666666'};
+    isSpace
+      ? '#ffffff55'
+      : status === 'correct'
+        ? color.malgyulWhite
+        : status === 'wrong'
+          ? color.malgyulRed
+          : '#666666'};
   width: ${({ isSpace }) => (isSpace ? '0.8rem' : 'auto')};
   display: inline-block;
   text-align: center;
