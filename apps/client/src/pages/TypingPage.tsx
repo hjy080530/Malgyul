@@ -1,12 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
-import SelectProperty from '../components/SelectProperty';
-import TypingChecker from '../components/TypingChecker';
-import fonts from '../types/fonts';
-import Header from '../components/Header';
-import styled from '@emotion/styled';
-import color from '../types/color';
-import Button from '../components/Button';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { fetchRandomLongSutra } from '../services/api';
+import TypingChecker from '../components/TypingChecker';
+import SelectProperty from '../components/SelectProperty';
 
 interface TypingResult {
   wpm: number;
@@ -17,24 +13,36 @@ interface TypingResult {
 const TypingPage = () => {
   const navigate = useNavigate();
   const [selectedSeconds, setSelectedSeconds] = useState(15);
+  const [selectedType, setSelectedType] = useState<'shortSutra' | 'longSutra'>('shortSutra');
   const [isStarted, setIsStarted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(15);
   const [isFinished, setIsFinished] = useState(false);
-
   const [typedText, setTypedText] = useState('');
-  const [originalText, setOriginalText] = useState('타자 연습할 문장을 여기에 준비하세요');
+  const [originalText, setOriginalText] = useState('문장을 불러오는 중...');
 
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const handleStart = () => {
+  const handleStart = async () => {
     setTimeLeft(selectedSeconds);
     setIsStarted(true);
+    setIsFinished(false);
+
+    if (selectedType === 'longSutra') {
+      try {
+        const result = await fetchRandomLongSutra();
+        setOriginalText(result?.text || '불러오기 실패');
+      } catch {
+        setOriginalText('불러오기 실패');
+      }
+    } else {
+      setOriginalText('짧은 문장을 여기에 직접 입력하거나 DB에서 가져오세요.');
+    }
   };
 
   useEffect(() => {
     if (isStarted) {
       timerRef.current = setInterval(() => {
-        setTimeLeft((prev) => {
+        setTimeLeft(prev => {
           if (prev <= 1) {
             clearInterval(timerRef.current!);
             setIsStarted(false);
@@ -45,23 +53,30 @@ const TypingPage = () => {
         });
       }, 1000);
     }
+
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [isStarted]);
 
-  const calculateTypingResult = (typedText: string, originalText: string, elapsedSeconds: number): TypingResult => {
-    const minutes = elapsedSeconds / 60;
-    const wordsTyped = typedText.trim().split(/\s+/).length;
-    const wpm = wordsTyped / minutes;
+  useEffect(() => {
+    if (isFinished) {
+      const result = calculateTypingResult(typedText, originalText, selectedSeconds);
+      navigate('/result', { state: result });
+    }
+  }, [isFinished]);
 
-    let correctCount = 0;
-    const length = Math.min(typedText.length, originalText.length);
-    for (let i = 0; i < length; i++) {
-      if (typedText[i] === originalText[i]) correctCount++;
+  const calculateTypingResult = (typed: string, original: string, seconds: number): TypingResult => {
+    const minutes = seconds / 60;
+    const words = typed.trim().split(/\s+/).length;
+    const wpm = words / minutes;
+
+    let correct = 0;
+    for (let i = 0; i < Math.min(typed.length, original.length); i++) {
+      if (typed[i] === original[i]) correct++;
     }
 
-    const accuracy = (correctCount / originalText.length) * 100;
+    const accuracy = (correct / original.length) * 100;
     const errorRate = 100 - accuracy;
 
     return {
@@ -71,34 +86,28 @@ const TypingPage = () => {
     };
   };
 
-  useEffect(() => {
-    if (isFinished) {
-      const typingResult = calculateTypingResult(typedText, originalText, selectedSeconds);
-      navigate('/result', { state: typingResult });
-    }
-  }, [isFinished, navigate, typedText, originalText, selectedSeconds]);
-
   return (
-    <StyledMainPage>
-      <Header />
-      {!isStarted && <SelectProperty setSelectedSeconds={setSelectedSeconds} />}
-      <TimerDisplay isStarted={isStarted}>
-        <h3 css={fonts.H3}>{timeLeft}초</h3>
-      </TimerDisplay>
+    <div>
+      {!isStarted && (
+        <SelectProperty
+          setSelectedSeconds={setSelectedSeconds}
+          setSelectedType={setSelectedType}
+        />
+      )}
+      <div>남은 시간: {timeLeft}초</div>
       <TypingChecker
-        selectedSeconds={selectedSeconds}
         isStarted={isStarted}
         onTimeEnd={() => {
           setIsStarted(false);
           setIsFinished(true);
         }}
         setTypedText={setTypedText}
-        setOriginalText={setOriginalText}
+        originalText={originalText}
       />
-      <StartButton onClick={handleStart} isStarted={isStarted}>
-        <p css={fonts.btn1}>시작하기</p>
-      </StartButton>
-    </StyledMainPage>
+      <button onClick={handleStart} disabled={isStarted}>
+        시작하기
+      </button>
+    </div>
   );
 };
 

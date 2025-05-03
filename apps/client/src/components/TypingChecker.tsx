@@ -1,31 +1,29 @@
-/** @jsxImportSource @emotion/react */
 import { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
 import fonts from '../types/fonts';
 import color from '../types/color';
 
 interface TypingCheckerProps {
-  selectedSeconds: number;
   isStarted: boolean;
   onTimeEnd: () => void;
   setTypedText: (text: string) => void;
   setOriginalText: (text: string) => void;
+  originalText: string;
 }
 
-const TypingChecker = ({ isStarted, onTimeEnd, setTypedText, setOriginalText }: TypingCheckerProps) => {
-  const targetText =
-    '사랑은 살아있는 것만 같아요 뒤돌아보지 않는 생명 처럼 잠깨서 비라도 내리면 그리워 한 게 누구였던가 너무나 아쉬운 하루같아요 어린아이와의 약속처럼 이대로 떠나가 야만 하나요 다시는 안오잖아요 이런 내 맘속에서 사는 것같이 비가 오는 날에는 더 살아숨쉬네 사랑은 살아있는 것만 같아요 뒤돌아보지않는 생명처럼 잠깨서 비라도 내리면 그리워 한 게 누구였던가 112';
+const TypingChecker = ({
+                         isStarted,
+                         onTimeEnd,
+                         setTypedText,
+                         originalText,
+                       }: TypingCheckerProps) => {
   const [input, setInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const textDisplayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setOriginalText(targetText);
-  }, [setOriginalText]);
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+    setTypedText(input);
+  }, [input]);
 
   useEffect(() => {
     if (isStarted) {
@@ -35,60 +33,45 @@ const TypingChecker = ({ isStarted, onTimeEnd, setTypedText, setOriginalText }: 
   }, [isStarted]);
 
   useEffect(() => {
-    setTypedText(input);
-  }, [input, setTypedText]);
-
-  useEffect(() => {
-    if (isStarted && input.length === targetText.length) {
+    if (isStarted && input.length === originalText.length) {
       onTimeEnd();
     }
-  }, [input, isStarted, onTimeEnd]);
-
-  useEffect(() => {
-    if (textDisplayRef.current) {
-      const element = textDisplayRef.current;
-      const maxScroll = element.scrollHeight - element.clientHeight;
-      if (input.length > 45 && element.scrollTop < maxScroll) {
-        const scrollAmount = 1.1;
-        element.scrollTop = Math.min(element.scrollTop + scrollAmount, maxScroll);
-      }
-    }
-  }, [input]);
+  }, [input, isStarted]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isStarted) return;
-
-    const nextValue = e.target.value;
-    if (nextValue.length <= targetText.length) {
-      setInput(nextValue); // 무조건 입력 반영
+    const next = e.target.value;
+    if (next.length <= originalText.length) {
+      setInput(next);
     }
   };
+
   return (
     <StyledTypingChecker onClick={() => inputRef.current?.focus()}>
       <TextDisplay ref={textDisplayRef}>
-        {targetText.split('').map((char, idx) => {
-          const typedChar = input[idx];
-          let status: 'correct' | 'wrong' | 'pending' = 'pending';
-
-          if (typedChar != null) {
-            status = typedChar === char ? 'correct' : 'wrong';
-          }
+        {originalText.split('').map((char, idx) => {
+          const typed = input[idx];
+          const status =
+            typed == null
+              ? 'pending'
+              : typed === char
+                ? 'correct'
+                : 'wrong';
 
           const isSpace = char === ' ';
-          const displayChar = isSpace ? '\u00A0' : char;
-
           return (
             <Char key={idx} status={status} isSpace={isSpace}>
-              {displayChar}
+              {isSpace ? '\u00A0' : char}
             </Char>
           );
         })}
-        {input.length < targetText.length && <Caret />}
+        {input.length < originalText.length && <Caret />}
       </TextDisplay>
       <HiddenInput ref={inputRef} value={input} onChange={handleChange} />
     </StyledTypingChecker>
   );
 };
+
 
 export default TypingChecker;
 

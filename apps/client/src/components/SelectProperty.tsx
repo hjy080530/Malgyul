@@ -8,62 +8,60 @@ import { css } from '@emotion/react';
 
 interface SelectPropertyProps {
   setSelectedSeconds: (seconds: number) => void;
+  setSelectedType: (type: 'shortSutra' | 'longSutra') => void;
 }
 
-// ✅ 여기 추가
 interface ChooseButtonStyledProps {
   isSelected: boolean;
 }
 
-const SelectProperty = ({ setSelectedSeconds }: SelectPropertyProps) => {
+const SelectProperty = ({ setSelectedSeconds, setSelectedType }: SelectPropertyProps) => {
   const [selectedIndexSeconds, setSelectedIndexSeconds] = useState<number>(0);
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const optionsSeconds = ['십오 초', '삽십 초', '육십 초'];
-  const optionsSecondsValue = [15, 30, 60];
-  const optionsString = ['명언', '긴 글'];
+  const [selectedTypeIndex, setSelectedTypeIndex] = useState<number>(0);
+
+  const timeOptions = ['십오 초', '삽십 초', '육십 초'];
+  const timeValues = [15, 30, 60];
+
+  const typeOptions = ['명언', '긴 글'];
+  const typeValues: Array<'shortSutra' | 'longSutra'> = ['shortSutra', 'longSutra'];
 
   return (
-    <StyledChooseSort>
-      <SecondsSort>
-        {optionsSeconds.map((label, index) => (
+    <Container>
+      <ButtonGroup>
+        {timeOptions.map((label, index) => (
           <StyledChooseButton
             key={index}
             isSelected={selectedIndexSeconds === index}
             onClick={() => {
               setSelectedIndexSeconds(index);
-              setSelectedSeconds(optionsSecondsValue[index]);
+              setSelectedSeconds(timeValues[index]);
             }}
           >
-            <p
-              css={css`
-                ${fonts.btn2}
-              `}
-            >
-              {label}
-            </p>
+            <p css={css`${fonts.btn2}`}>{label}</p>
           </StyledChooseButton>
         ))}
-      </SecondsSort>
-      <SecondsSort>
-        {optionsString.map((label, index) => (
-          <StyledChooseButton key={index} isSelected={selectedIndex === index} onClick={() => setSelectedIndex(index)}>
-            <p
-              css={css`
-                ${fonts.btn2}
-              `}
-            >
-              {label}
-            </p>
+      </ButtonGroup>
+      <ButtonGroup>
+        {typeOptions.map((label, index) => (
+          <StyledChooseButton
+            key={index}
+            isSelected={selectedTypeIndex === index}
+            onClick={() => {
+              setSelectedTypeIndex(index);
+              setSelectedType(typeValues[index]);
+            }}
+          >
+            <p css={css`${fonts.btn2}`}>{label}</p>
           </StyledChooseButton>
         ))}
-      </SecondsSort>
-    </StyledChooseSort>
+      </ButtonGroup>
+    </Container>
   );
 };
 
 export default SelectProperty;
 
-const StyledChooseSort = styled.div`
+const Container = styled.div`
   display: flex;
   justify-content: space-between;
   width: 60%;
@@ -71,11 +69,9 @@ const StyledChooseSort = styled.div`
   align-items: flex-start;
 `;
 
-const SecondsSort = styled.div`
+const ButtonGroup = styled.div`
   display: flex;
-  width: fit-content;
   gap: 20px;
-  height: fit-content;
 `;
 
 const StyledChooseButton = styled(ChooseButton)<ChooseButtonStyledProps>`
@@ -83,8 +79,7 @@ const StyledChooseButton = styled(ChooseButton)<ChooseButtonStyledProps>`
   border-bottom: ${({ isSelected }) => (isSelected ? `5px solid ${color.malgyulGreen}` : 'none')};
   background: transparent;
   cursor: pointer;
-  margin: 0;
   padding: 0;
-  transition: border-bottom 0.2s ease-in-out;
   color: ${color.malgyulWhite};
+  transition: border-bottom 0.2s ease-in-out;
 `;

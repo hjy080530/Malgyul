@@ -1,12 +1,12 @@
 {
-"compilerOptions": {
-"jsx": "react-jsx",
-"jsxImportSource": "@emotion/react"
-},
-"files": [],
-"references": [
-{ "path": "./tsconfig.app.json" },
-{ "path": "./tsconfig.node.json" },
-{ "path": "./client" }
-]
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "module": "esnext",
+    "jsxImportSource": "@emotion/react"
+  },
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }
