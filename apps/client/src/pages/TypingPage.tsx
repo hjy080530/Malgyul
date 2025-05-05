@@ -159,7 +159,7 @@ const StyledMainDisplay=styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 7rem;
+  margin-bottom: 9rem;
 `;
 const TimerDisplay = styled.div`
   font-size: 1.5rem;
