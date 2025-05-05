@@ -150,7 +150,7 @@ const StyledMainPage = styled.div`
   width: 100%;
   min-height: 100vh;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%), ${color.malgyulBlack};
-  gap: 11rem;
+  gap: 4rem;
 `;
 const StyledMainDisplay=styled.div`
   width: 90%;
@@ -159,6 +159,7 @@ const StyledMainDisplay=styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 7rem;
 `;
 const TimerDisplay = styled.div`
   font-size: 1.5rem;
