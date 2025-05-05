@@ -21,6 +21,7 @@ const SelectProperty = ({ setSelectedSeconds, setSelectedType }: SelectPropertyP
   const optionsSeconds = ['십오 초', '삽십 초', '육십 초'];
   const optionsSecondsValue = [15, 30, 60];
   const optionsString = ['명언', '긴 글'];
+  const optionsTypeValue = ['shortSutra', 'longSutra'] as const;
 
   return (
     <StyledChooseSort>
@@ -49,8 +50,10 @@ const SelectProperty = ({ setSelectedSeconds, setSelectedType }: SelectPropertyP
           <StyledChooseButton
             key={index}
             isSelected={selectedIndex === index}
-            onClick={() => setSelectedIndex(index),
-              setSelectedType(optionsTypeValue[index])}
+            onClick={() => {
+              setSelectedIndex(index);
+              setSelectedType(optionsTypeValue[index]);
+            }}
           >
             <p
               css={css`

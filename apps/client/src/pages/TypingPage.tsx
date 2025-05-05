@@ -6,7 +6,10 @@ import TypingChecker from '../components/TypingChecker';
 import SelectProperty from '../components/SelectProperty';
 import color from '../types/color';
 import Button from '../components/Button';
-import { loadSutras } from '@/utills/loadSutras';
+import { loadSutras } from '../utills/loadSutras';
+import Header from '../components/Header';
+import { css } from '@emotion/react';
+import font from '../types/fonts';
 
 interface TypingResult {
   wpm: number;
@@ -22,29 +25,28 @@ const TypingPage = () => {
   const [timeLeft, setTimeLeft] = useState(15);
   const [isFinished, setIsFinished] = useState(false);
   const [typedText, setTypedText] = useState('');
-  const [originalText, setOriginalText] = useState('');
-
-  const handleStart = async () => {
-    const data = await loadSutras();
-
-    if (selectedType === 'shortSutra') {
-      const selected = [...data.shortSutra]
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 6)
-        .join(' ');
-      setOriginalText(selected);
-    } else {
-      const selected = data.longSutra[Math.floor(Math.random() * data.longSutra.length)];
-      setOriginalText(selected);
-    }
-
-    setTimeLeft(selectedSeconds);
-    setIsStarted(true);
-    setIsFinished(false);
-  };
+  const [originalText, setOriginalText] = useState('듣고 싶은 부처님의 말씀을 정해보세요');
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  const handleStart = async () => {
+    const data = await loadSutras();
+    let selected = '';
+
+    if (selectedType === 'shortSutra') {
+      selected = [...data.shortSutra]
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 6)
+        .join(' ');
+    } else {
+      selected = data.longSutra[Math.floor(Math.random() * data.longSutra.length)];
+    }
+    setOriginalText(selected);
+    setTypedText('');
+    setTimeLeft(selectedSeconds);
+    setIsFinished(false);
+    setIsStarted(true); // ⭐ 이건 제일 마지막에 해줘야해!
+  };
 
   useEffect(() => {
     if (isStarted) {
@@ -94,27 +96,48 @@ const TypingPage = () => {
   };
 
   return (
-    <div>
+    <StyledMainPage>
+      <Header />
+      <StyledMainDisplay>
       {!isStarted && (
         <SelectProperty
           setSelectedSeconds={setSelectedSeconds}
           setSelectedType={setSelectedType}
         />
       )}
-      <div>남은 시간: {timeLeft}초</div>
-      <TypingChecker
-        isStarted={isStarted}
-        onTimeEnd={() => {
-          setIsStarted(false);
-          setIsFinished(true);
-        }}
-        setTypedText={setTypedText}
-        originalText={originalText}
-      />
-      <button onClick={handleStart} disabled={isStarted}>
-        시작하기
-      </button>
-    </div>
+      {originalText && (
+        <>
+          {isStarted &&
+            <TimerDisplay>
+              <h1
+
+              css={[
+                font.H1,
+                css`
+              color: ${color.malgyulGreen};
+            `,
+              ]}
+              >{timeLeft}초</h1>
+
+            </TimerDisplay>}
+          <TypingChecker
+            isStarted={isStarted}
+            onTimeEnd={() => {
+              setIsStarted(false);
+              setIsFinished(true);
+            }}
+            setTypedText={setTypedText}
+            originalText={originalText}
+          />
+        </>
+      )}
+      </StyledMainDisplay>
+      {!isStarted && (
+        <StartButton onClick={handleStart} isStarted={false}>
+          시작하기
+        </StartButton>
+      )}
+    </StyledMainPage>
   );
 };
 
@@ -127,13 +150,19 @@ const StyledMainPage = styled.div`
   width: 100%;
   min-height: 100vh;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%), ${color.malgyulBlack};
-  gap: 2rem;
+  gap: 11rem;
 `;
-
-const TimerDisplay = styled.div<{ isStarted: boolean }>`
+const StyledMainDisplay=styled.div`
+  width: 90%;
+  height: 100%;
+  gap: 2rem;  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const TimerDisplay = styled.div`
   font-size: 1.5rem;
   color: ${color.malgyulGreen};
-  display: ${({ isStarted }) => (isStarted ? 'block' : 'none')};
 `;
 
 const StartButton = styled(Button)<{ isStarted: boolean }>`

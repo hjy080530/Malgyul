@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+// esModuleInterop 꺼져있을 때는 이렇게!
+import * as react from '@vitejs/plugin-react';
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react.default()],
 });

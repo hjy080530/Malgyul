@@ -15,6 +15,7 @@ const ResultPage = () => {
   const handleClick = () => {
     navigate('/typing');
   };
+  console.log('state:', state);
   return (
     <StyledResultPage>
       <Header />
@@ -126,7 +127,7 @@ const ResultPage = () => {
       </ResultTextSort>
       <Button onClick={handleClick}>다시하기</Button>
       <BuddaWrapper>
-        <Budda width="800px" />
+        <Budda width="800px"/>
       </BuddaWrapper>
     </StyledResultPage>
   );
@@ -151,10 +152,7 @@ const TextSort = styled.div`
   display: flex;
   flex-direction: column;
   gap: -100px;
-  & h1,
-  & h4,
-  & p,
-  & h3 {
+  & h1, & h4, & p, & h3 {
     margin: 0;
     padding: 10px 0 0 0;
     line-height: 1;
@@ -181,6 +179,8 @@ const BuddaWrapper = styled.div`
   z-index: 10;
   padding: 0;
   margin: 0;
+  pointer-events: none;
+  
 `;
 const ResultTextSort = styled.div`
   display: flex;
