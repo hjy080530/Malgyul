@@ -97,6 +97,7 @@ const TypingPage = () => {
 
   return (
     <StyledMainPage>
+      <StyledHelpMe>
       <Header />
       <StyledMainDisplay>
       {!isStarted && (
@@ -132,6 +133,7 @@ const TypingPage = () => {
         </>
       )}
       </StyledMainDisplay>
+      </StyledHelpMe>
       {!isStarted && (
         <StartButton onClick={handleStart} isStarted={false}>
           시작하기
@@ -159,7 +161,15 @@ const StyledMainDisplay=styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 9rem;
+`;
+const StyledHelpMe=styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  gap: 7rem;
 `;
 const TimerDisplay = styled.div`
   font-size: 1.5rem;
