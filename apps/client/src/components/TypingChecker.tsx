@@ -9,6 +9,7 @@ interface TypingCheckerProps {
   setTypedText: (text: string) => void;
   setOriginalText: (text: string) => void;
   originalText: string;
+  selectedSeconds: number;
 }
 
 const TypingChecker = ({
@@ -23,7 +24,7 @@ const TypingChecker = ({
 
   useEffect(() => {
     setTypedText(input);
-  }, [input]);
+  }, [input, setTypedText]);
 
   useEffect(() => {
     if (isStarted) {
@@ -36,7 +37,7 @@ const TypingChecker = ({
     if (isStarted && input.length === originalText.length) {
       onTimeEnd();
     }
-  }, [input, isStarted]);
+  }, [input, isStarted, originalText.length, onTimeEnd]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isStarted) return;
@@ -71,7 +72,6 @@ const TypingChecker = ({
     </StyledTypingChecker>
   );
 };
-
 
 export default TypingChecker;
 

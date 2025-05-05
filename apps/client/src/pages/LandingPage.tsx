@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import BackgroundImg from '../assets/images/langing_background.svg';
+import BackgroundImg from '../assets/images/background.png';
 import font from '../types/fonts.ts';
 import color from '../types/color.ts';
 import { css } from '@emotion/react';
