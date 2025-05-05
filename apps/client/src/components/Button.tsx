@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import font from '../types/fonts.ts';
+import font from '../types/fonts';
 import { css } from '@emotion/react';
-import color from '../types/color.ts';
+import color from '../types/color';
 
 type ButtonProps = {
   children: React.ReactNode;

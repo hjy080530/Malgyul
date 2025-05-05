@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 import BackgroundImg from '../assets/images/langing_background.svg';
-import font from '../types/fonts.ts';
-import color from '../types/color.ts';
+import font from '../types/fonts';
+import color from '../types/color';
 import { css } from '@emotion/react';
-import Logo from '../assets/images/malgyul_logo.tsx';
-import Button from '../components/Button.tsx';
+import Logo from '../assets/images/malgyul_logo';
+import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {

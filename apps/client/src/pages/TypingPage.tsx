@@ -1,29 +1,55 @@
-import { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import SelectProperty from '../components/SelectProperty';
-import TypingChecker from '../components/TypingChecker';
-import fonts from '../types/fonts';
-import Header from '../components/Header';
+/** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
+import { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import TypingChecker from '../components/TypingChecker';
+import SelectProperty from '../components/SelectProperty';
 import color from '../types/color';
+import Button from '../components/Button';
+import { loadSutras } from '@/utills/loadSutras';
+
+interface TypingResult {
+  wpm: number;
+  accuracy: number;
+  errorRate: number;
+}
 
 const TypingPage = () => {
+  const navigate = useNavigate();
   const [selectedSeconds, setSelectedSeconds] = useState(15);
+  const [selectedType, setSelectedType] = useState<'shortSutra' | 'longSutra'>('shortSutra');
   const [isStarted, setIsStarted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(15);
   const [isFinished, setIsFinished] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const navigate = useNavigate();
+  const [typedText, setTypedText] = useState('');
+  const [originalText, setOriginalText] = useState('');
 
-  const handleStart = () => {
+  const handleStart = async () => {
+    const data = await loadSutras();
+
+    if (selectedType === 'shortSutra') {
+      const selected = [...data.shortSutra]
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 6)
+        .join(' ');
+      setOriginalText(selected);
+    } else {
+      const selected = data.longSutra[Math.floor(Math.random() * data.longSutra.length)];
+      setOriginalText(selected);
+    }
+
     setTimeLeft(selectedSeconds);
     setIsStarted(true);
+    setIsFinished(false);
   };
+
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
 
   useEffect(() => {
     if (isStarted) {
       timerRef.current = setInterval(() => {
-        setTimeLeft((prev) => {
+        setTimeLeft(prev => {
           if (prev <= 1) {
             clearInterval(timerRef.current!);
             setIsStarted(false);
@@ -34,6 +60,7 @@ const TypingPage = () => {
         });
       }, 1000);
     }
+
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
@@ -41,27 +68,53 @@ const TypingPage = () => {
 
   useEffect(() => {
     if (isFinished) {
-      navigate('/result');
+      const result = calculateTypingResult(typedText, originalText, selectedSeconds);
+      navigate('/result', { state: result });
     }
-  }, [isFinished, navigate]);
+  }, [isFinished]);
+
+  const calculateTypingResult = (typed: string, original: string, seconds: number): TypingResult => {
+    const minutes = seconds / 60;
+    const words = typed.trim().split(/\s+/).length;
+    const wpm = words / minutes;
+
+    let correct = 0;
+    for (let i = 0; i < Math.min(typed.length, original.length); i++) {
+      if (typed[i] === original[i]) correct++;
+    }
+
+    const accuracy = (correct / original.length) * 100;
+    const errorRate = 100 - accuracy;
+
+    return {
+      wpm: Math.round(wpm),
+      accuracy: Math.round(accuracy),
+      errorRate: Math.round(errorRate),
+    };
+  };
 
   return (
-    <StyledMainPage>
-      <Header />
-      {!isStarted && <SelectProperty setSelectedSeconds={setSelectedSeconds} />}
-      <TimerDisplay isStarted={isStarted}>
-        <h3 css={fonts.H3}>{timeLeft}초</h3>
-      </TimerDisplay>
+    <div>
+      {!isStarted && (
+        <SelectProperty
+          setSelectedSeconds={setSelectedSeconds}
+          setSelectedType={setSelectedType}
+        />
+      )}
+      <div>남은 시간: {timeLeft}초</div>
       <TypingChecker
-        selectedSeconds={selectedSeconds}
         isStarted={isStarted}
         onTimeEnd={() => {
           setIsStarted(false);
           setIsFinished(true);
         }}
+        setTypedText={setTypedText}
+        originalText={originalText}
       />
-      <StartButton onClick={handleStart}>시작하기</StartButton>
-    </StyledMainPage>
+      <button onClick={handleStart} disabled={isStarted}>
+        시작하기
+      </button>
+    </div>
   );
 };
 
@@ -73,8 +126,7 @@ const StyledMainPage = styled.div`
   align-items: center;
   width: 100%;
   min-height: 100vh;
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%), ${color.malgyulBlack};
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%), ${color.malgyulBlack};
   gap: 2rem;
 `;
 
@@ -84,12 +136,6 @@ const TimerDisplay = styled.div<{ isStarted: boolean }>`
   display: ${({ isStarted }) => (isStarted ? 'block' : 'none')};
 `;
 
-const StartButton = styled.button`
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  background-color: ${color.malgyulGreen};
-  color: ${color.malgyulWhite};
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+const StartButton = styled(Button)<{ isStarted: boolean }>`
+  display: ${({ isStarted }) => (isStarted ? 'none' : 'block')};
 `;

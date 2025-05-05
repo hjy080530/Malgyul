@@ -7,15 +7,15 @@ import color from '../types/color';
 import { css } from '@emotion/react';
 
 interface SelectPropertyProps {
-  setSelectedSeconds: (seconds: number) => void;
+  setSelectedSeconds: React.Dispatch<React.SetStateAction<number>>;
+  setSelectedType: React.Dispatch<React.SetStateAction<'shortSutra' | 'longSutra'>>;
 }
 
-// ✅ 여기 추가
 interface ChooseButtonStyledProps {
   isSelected: boolean;
 }
 
-const SelectProperty = ({ setSelectedSeconds }: SelectPropertyProps) => {
+const SelectProperty = ({ setSelectedSeconds, setSelectedType }: SelectPropertyProps) => {
   const [selectedIndexSeconds, setSelectedIndexSeconds] = useState<number>(0);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const optionsSeconds = ['십오 초', '삽십 초', '육십 초'];
@@ -49,7 +49,8 @@ const SelectProperty = ({ setSelectedSeconds }: SelectPropertyProps) => {
           <StyledChooseButton
             key={index}
             isSelected={selectedIndex === index}
-            onClick={() => setSelectedIndex(index)}
+            onClick={() => setSelectedIndex(index),
+              setSelectedType(optionsTypeValue[index])}
           >
             <p
               css={css`

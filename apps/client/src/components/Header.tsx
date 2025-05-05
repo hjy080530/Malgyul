@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import Logo from '../assets/images/malgyul_logo.tsx';
+import Logo from '../assets/images/malgyul_logo';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {

@@ -15,6 +15,9 @@ export const fontGenerator = (
 `;
 
 const fonts = {
+  D1: fontGenerator(700, 16, 0, 0),
+  D2: fontGenerator(700, 8, 0, 0),
+
   H1: fontGenerator(500, 3.125, 3.4375, 0),
   H2: fontGenerator(700, 1.75, 140, 0),
   H3: fontGenerator(500, 2, 35.2, 0),
