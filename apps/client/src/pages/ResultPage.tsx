@@ -127,7 +127,7 @@ const ResultPage = () => {
       </ResultTextSort>
       <Button onClick={handleClick}>다시하기</Button>
       <BuddaWrapper>
-        <Budda width="800px"/>
+        <Budda width="800px" />
       </BuddaWrapper>
     </StyledResultPage>
   );
@@ -143,7 +143,8 @@ const StyledResultPage = styled.div`
   width: 100%;
   min-height: 100vh;
   padding: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%), ${color.malgyulBlack};
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%), ${color.malgyulBlack};
   gap: 2rem;
   overflow: hidden;
 `;
@@ -152,7 +153,10 @@ const TextSort = styled.div`
   display: flex;
   flex-direction: column;
   gap: -100px;
-  & h1, & h4, & p, & h3 {
+  & h1,
+  & h4,
+  & p,
+  & h3 {
     margin: 0;
     padding: 10px 0 0 0;
     line-height: 1;
@@ -180,7 +184,6 @@ const BuddaWrapper = styled.div`
   padding: 0;
   margin: 0;
   pointer-events: none;
-  
 `;
 const ResultTextSort = styled.div`
   display: flex;

@@ -51,7 +51,7 @@ const TypingPage = () => {
   useEffect(() => {
     if (isStarted) {
       timerRef.current = setInterval(() => {
-        setTimeLeft(prev => {
+        setTimeLeft((prev) => {
           if (prev <= 1) {
             clearInterval(timerRef.current!);
             setIsStarted(false);
@@ -75,7 +75,11 @@ const TypingPage = () => {
     }
   }, [isFinished]);
 
-  const calculateTypingResult = (typed: string, original: string, seconds: number): TypingResult => {
+  const calculateTypingResult = (
+    typed: string,
+    original: string,
+    seconds: number,
+  ): TypingResult => {
     const minutes = seconds / 60;
     const words = typed.trim().split(/\s+/).length;
     const wpm = words / minutes;
@@ -98,41 +102,42 @@ const TypingPage = () => {
   return (
     <StyledMainPage>
       <StyledHelpMe>
-      <Header />
-      <StyledMainDisplay>
-      {!isStarted && (
-        <SelectProperty
-          setSelectedSeconds={setSelectedSeconds}
-          setSelectedType={setSelectedType}
-        />
-      )}
-      {originalText && (
-        <>
-          {isStarted &&
-            <TimerDisplay>
-              <h1
-
-              css={[
-                font.H1,
-                css`
-              color: ${color.malgyulGreen};
-            `,
-              ]}
-              >{timeLeft}초</h1>
-
-            </TimerDisplay>}
-          <TypingChecker
-            isStarted={isStarted}
-            onTimeEnd={() => {
-              setIsStarted(false);
-              setIsFinished(true);
-            }}
-            setTypedText={setTypedText}
-            originalText={originalText}
-          />
-        </>
-      )}
-      </StyledMainDisplay>
+        <Header />
+        <StyledMainDisplay>
+          {!isStarted && (
+            <SelectProperty
+              setSelectedSeconds={setSelectedSeconds}
+              setSelectedType={setSelectedType}
+            />
+          )}
+          {originalText && (
+            <>
+              {isStarted && (
+                <TimerDisplay>
+                  <h1
+                    css={[
+                      font.H1,
+                      css`
+                        color: ${color.malgyulGreen};
+                      `,
+                    ]}
+                  >
+                    {timeLeft}초
+                  </h1>
+                </TimerDisplay>
+              )}
+              <TypingChecker
+                isStarted={isStarted}
+                onTimeEnd={() => {
+                  setIsStarted(false);
+                  setIsFinished(true);
+                }}
+                setTypedText={setTypedText}
+                originalText={originalText}
+              />
+            </>
+          )}
+        </StyledMainDisplay>
       </StyledHelpMe>
       {!isStarted && (
         <StartButton onClick={handleStart} isStarted={false}>
@@ -151,18 +156,19 @@ const StyledMainPage = styled.div`
   align-items: center;
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%), ${color.malgyulBlack};
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%), ${color.malgyulBlack};
   gap: 4rem;
 `;
-const StyledMainDisplay=styled.div`
+const StyledMainDisplay = styled.div`
   width: 90%;
   height: 100%;
-  gap: 2rem;  
+  gap: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-const StyledHelpMe=styled.div`
+const StyledHelpMe = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
