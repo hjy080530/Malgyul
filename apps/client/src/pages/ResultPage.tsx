@@ -106,11 +106,13 @@ const TitleSort = styled.div`
   gap: 10px;
   flex-direction: row;
 `;
+
 const SmallTextSort = styled.div`
   display: flex;
   flex-direction: row;
   gap: 30px;
 `;
+
 const BuddaWrapper = styled.div`
   position: absolute;
   top: 0;
@@ -122,6 +124,7 @@ const BuddaWrapper = styled.div`
   margin: 0;
   pointer-events: none;
 `;
+
 const ResultTextSort = styled.div`
   display: flex;
   flex-direction: column;
