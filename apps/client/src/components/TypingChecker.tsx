@@ -12,11 +12,11 @@ interface TypingCheckerProps {
 }
 
 const TypingChecker = ({
-                         isStarted,
-                         onTimeEnd,
-                         setTypedText,
-                         originalText ,
-                       }: TypingCheckerProps) => {
+  isStarted,
+  onTimeEnd,
+  setTypedText,
+  originalText,
+}: TypingCheckerProps) => {
   const [input, setInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const textDisplayRef = useRef<HTMLDivElement>(null);
@@ -63,12 +63,7 @@ const TypingChecker = ({
       <TextDisplay ref={textDisplayRef}>
         {originalText.split('').map((char, idx) => {
           const typed = input[idx];
-          const status =
-            typed == null
-              ? 'pending'
-              : typed === char
-                ? 'correct'
-                : 'wrong';
+          const status = typed == null ? 'pending' : typed === char ? 'correct' : 'wrong';
           const isSpace = char === ' ';
           return (
             <Char key={idx} status={status} isSpace={isSpace}>
@@ -108,17 +103,13 @@ const TextDisplay = styled.div`
   width: 100%;
   padding-bottom: 0.5rem;
   white-space: nowrap;
-  caret-color: transparent; 
+  caret-color: transparent;
   caret-display: none;
 `;
 
 const Char = styled.span<{ status: 'correct' | 'wrong' | 'pending'; isSpace: boolean }>`
   color: ${({ status }) =>
-  status === 'correct'
-    ? color.malgyulWhite
-    : status === 'wrong'
-      ? color.malgyulRed
-      : '#666666'};
+    status === 'correct' ? color.malgyulWhite : status === 'wrong' ? color.malgyulRed : '#666666'};
   white-space: ${({ isSpace }) => (isSpace ? 'pre' : 'normal')};
 `;
 

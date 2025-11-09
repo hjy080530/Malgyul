@@ -3,6 +3,6 @@ const color = {
   malgyulWhite: '#FFFFFF',
   malgyulGreen: '#00903E',
   malgyulRed: '#FD6459',
-  malgyulGray: '#ffffff99'
+  malgyulGray: '#ffffff99',
 };
 export default color;
